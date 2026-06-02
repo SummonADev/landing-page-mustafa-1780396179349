@@ -35,89 +35,135 @@ export default function Hero() {
         <div className="absolute bottom-48 left-20 w-2 h-2 rounded-full bg-accent animate-float opacity-60" style={{ animationDelay: '0.5s' }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
-          <span className="flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-brand opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-brand" />
-          </span>
-          <span className="text-sm text-gray-300">Now in public beta — </span>
-          <span className="text-sm font-semibold gradient-text">Try it free</span>
-          <ArrowRight className="w-3 h-3 text-brand" />
-        </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Two-column layout: text left, image right */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
 
-        {/* Headline */}
-        <h1
-          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 animate-fade-in-up"
-          style={{ animationDelay: '0.2s', opacity: 0 }}
-        >
-          Build the future,
-          <br />
-          <span className="gradient-text">ship it faster.</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up"
-          style={{ animationDelay: '0.3s', opacity: 0 }}
-        >
-          Luminary is the all-in-one platform that empowers modern product teams to collaborate, iterate, and launch with unprecedented speed and confidence.
-        </p>
-
-        {/* CTA Buttons */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up"
-          style={{ animationDelay: '0.4s', opacity: 0 }}
-        >
-          <a
-            href="#pricing"
-            className="group flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white text-lg transition-all duration-200 hover:scale-105 hover:shadow-2xl animate-pulse-glow"
-            style={{ background: 'linear-gradient(135deg, #6C63FF, #a89cff)' }}
-          >
-            Start for free
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <button
-            className="flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-gray-300 text-lg glass hover:text-white transition-all duration-200 hover:scale-105"
-          >
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(108,99,255,0.3)' }}>
-              <Play className="w-3 h-3 text-brand fill-brand" />
+          {/* Left column — copy */}
+          <div className="flex-1 text-center lg:text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-brand opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand" />
+              </span>
+              <span className="text-sm text-gray-300">Now in public beta — </span>
+              <span className="text-sm font-semibold gradient-text">Try it free</span>
+              <ArrowRight className="w-3 h-3 text-brand" />
             </div>
-            Watch demo
-          </button>
-        </div>
 
-        {/* Social Proof */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up"
-          style={{ animationDelay: '0.5s', opacity: 0 }}
-        >
-          <div className="flex -space-x-2">
-            {['#6C63FF','#FF6584','#a89cff','#34d399','#f59e0b'].map((color, i) => (
-              <div
-                key={i}
-                className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold text-white"
-                style={{ backgroundColor: color, borderColor: '#0f0f1a', zIndex: 5 - i }}
+            {/* Headline */}
+            <h1
+              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 animate-fade-in-up"
+              style={{ animationDelay: '0.2s', opacity: 0 }}
+            >
+              Build the future,
+              <br />
+              <span className="gradient-text">ship it faster.</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p
+              className="text-lg sm:text-xl text-gray-400 max-w-2xl lg:max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in-up"
+              style={{ animationDelay: '0.3s', opacity: 0 }}
+            >
+              Luminary is the all-in-one platform that empowers modern product teams to collaborate, iterate, and launch with unprecedented speed and confidence.
+            </p>
+
+            {/* CTA Buttons */}
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 animate-fade-in-up"
+              style={{ animationDelay: '0.4s', opacity: 0 }}
+            >
+              <a
+                href="#pricing"
+                className="group flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white text-lg transition-all duration-200 hover:scale-105 hover:shadow-2xl animate-pulse-glow"
+                style={{ background: 'linear-gradient(135deg, #6C63FF, #a89cff)' }}
               >
-                {['A','B','C','D','E'][i]}
+                Start for free
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <button
+                className="flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-gray-300 text-lg glass hover:text-white transition-all duration-200 hover:scale-105"
+              >
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(108,99,255,0.3)' }}>
+                  <Play className="w-3 h-3 text-brand fill-brand" />
+                </div>
+                Watch demo
+              </button>
+            </div>
+
+            {/* Social Proof */}
+            <div
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 animate-fade-in-up"
+              style={{ animationDelay: '0.5s', opacity: 0 }}
+            >
+              <div className="flex -space-x-2">
+                {['#6C63FF','#FF6584','#a89cff','#34d399','#f59e0b'].map((color, i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold text-white"
+                    style={{ backgroundColor: color, borderColor: '#0f0f1a', zIndex: 5 - i }}
+                  >
+                    {['A','B','C','D','E'][i]}
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="flex items-center gap-1">
+                {[1,2,3,4,5].map(i => (
+                  <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                ))}
+              </div>
+              <p className="text-sm text-gray-400">
+                <span className="text-white font-semibold">4,800+</span> teams already building with Luminary
+              </p>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            {[1,2,3,4,5].map(i => (
-              <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-            ))}
+
+          {/* Right column — user image */}
+          <div
+            className="flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg animate-fade-in-up"
+            style={{ animationDelay: '0.45s', opacity: 0 }}
+          >
+            <div className="relative">
+              {/* Glow ring behind image */}
+              <div
+                className="absolute inset-0 rounded-3xl blur-2xl opacity-40 scale-105"
+                style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #FF6584 100%)' }}
+              />
+              {/* Image frame */}
+              <div className="relative glass rounded-3xl p-1 shadow-2xl" style={{ boxShadow: '0 0 60px rgba(108,99,255,0.25), 0 40px 80px rgba(0,0,0,0.5)' }}>
+                <img
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80"
+                  alt="Profile"
+                  className="w-full rounded-2xl object-cover"
+                  style={{ aspectRatio: '4/5' }}
+                />
+                {/* Floating badge — top-left */}
+                <div className="absolute -top-4 -left-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6C63FF, #a89cff)' }}>
+                    <Star className="w-4 h-4 text-white fill-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400 leading-none mb-0.5">Rating</p>
+                    <p className="text-sm font-bold text-white leading-none">5.0 / 5.0</p>
+                  </div>
+                </div>
+                {/* Floating badge — bottom-right */}
+                <div className="absolute -bottom-4 -right-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <p className="text-sm font-semibold text-white">Available now</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-sm text-gray-400">
-            <span className="text-white font-semibold">4,800+</span> teams already building with Luminary
-          </p>
+
         </div>
 
-        {/* Hero Dashboard Mockup */}
+        {/* Hero Dashboard Mockup — full width below */}
         <div
-          className="mt-20 relative mx-auto max-w-5xl animate-fade-in-up"
-          style={{ animationDelay: '0.6s', opacity: 0 }}
+          className="mt-24 relative mx-auto max-w-5xl animate-fade-in-up"
+          style={{ animationDelay: '0.65s', opacity: 0 }}
         >
           <div className="glass rounded-2xl p-1 shadow-2xl" style={{ boxShadow: '0 0 60px rgba(108,99,255,0.2), 0 40px 80px rgba(0,0,0,0.5)' }}>
             {/* Fake browser bar */}
