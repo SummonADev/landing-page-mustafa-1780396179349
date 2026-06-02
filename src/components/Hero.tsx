@@ -1,11 +1,24 @@
-import { ArrowRight, Play, Star } from 'lucide-react';
+import { ArrowRight, Play, Star, Upload } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 export default function Hero() {
+  const [photoSrc, setPhotoSrc] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setPhotoSrc(ev.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden hero-gradient noise-bg">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Orbs */}
         <div
           className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-20 blur-3xl"
           style={{ background: 'radial-gradient(circle, #6C63FF, transparent)' }}
@@ -18,8 +31,6 @@ export default function Hero() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-5 blur-3xl"
           style={{ background: 'radial-gradient(circle, #6C63FF, transparent)' }}
         />
-
-        {/* Grid lines */}
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -27,8 +38,6 @@ export default function Hero() {
             backgroundSize: '60px 60px',
           }}
         />
-
-        {/* Floating shapes */}
         <div className="absolute top-24 right-24 w-3 h-3 rounded-full bg-brand animate-float opacity-60" style={{ animationDelay: '0s' }} />
         <div className="absolute top-40 left-32 w-2 h-2 rounded-full bg-accent animate-float opacity-50" style={{ animationDelay: '1s' }} />
         <div className="absolute bottom-32 right-32 w-4 h-4 rounded-full bg-brand-light animate-float opacity-40" style={{ animationDelay: '2s' }} />
@@ -36,12 +45,10 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Two-column layout: text left, image right */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
 
           {/* Left column — copy */}
           <div className="flex-1 text-center lg:text-left">
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-brand opacity-75" />
@@ -52,7 +59,6 @@ export default function Hero() {
               <ArrowRight className="w-3 h-3 text-brand" />
             </div>
 
-            {/* Headline */}
             <h1
               className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-6 animate-fade-in-up"
               style={{ animationDelay: '0.2s', opacity: 0 }}
@@ -62,7 +68,6 @@ export default function Hero() {
               <span className="gradient-text">ship it faster.</span>
             </h1>
 
-            {/* Subtitle */}
             <p
               className="text-lg sm:text-xl text-gray-400 max-w-2xl lg:max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in-up"
               style={{ animationDelay: '0.3s', opacity: 0 }}
@@ -70,7 +75,6 @@ export default function Hero() {
               Luminary is the all-in-one platform that empowers modern product teams to collaborate, iterate, and launch with unprecedented speed and confidence.
             </p>
 
-            {/* CTA Buttons */}
             <div
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 animate-fade-in-up"
               style={{ animationDelay: '0.4s', opacity: 0 }}
@@ -93,7 +97,6 @@ export default function Hero() {
               </button>
             </div>
 
-            {/* Social Proof */}
             <div
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 animate-fade-in-up"
               style={{ animationDelay: '0.5s', opacity: 0 }}
@@ -120,7 +123,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right column — user image */}
+          {/* Right column — user photo */}
           <div
             className="flex-shrink-0 w-full max-w-sm lg:max-w-md xl:max-w-lg animate-fade-in-up"
             style={{ animationDelay: '0.45s', opacity: 0 }}
@@ -132,13 +135,65 @@ export default function Hero() {
                 style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #FF6584 100%)' }}
               />
               {/* Image frame */}
-              <div className="relative glass rounded-3xl p-1 shadow-2xl" style={{ boxShadow: '0 0 60px rgba(108,99,255,0.25), 0 40px 80px rgba(0,0,0,0.5)' }}>
-                <img
-                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80"
-                  alt="Profile"
-                  className="w-full rounded-2xl object-cover"
-                  style={{ aspectRatio: '4/5' }}
+              <div
+                className="relative glass rounded-3xl p-1 shadow-2xl"
+                style={{ boxShadow: '0 0 60px rgba(108,99,255,0.25), 0 40px 80px rgba(0,0,0,0.5)' }}
+              >
+                {photoSrc ? (
+                  <img
+                    src={photoSrc}
+                    alt="Your photo"
+                    className="w-full rounded-2xl object-cover"
+                    style={{ aspectRatio: '4/5', maxHeight: '520px' }}
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full rounded-2xl flex flex-col items-center justify-center gap-4 cursor-pointer transition-all duration-200 hover:bg-white/5"
+                    style={{ aspectRatio: '4/5', minHeight: '320px', background: 'rgba(108,99,255,0.07)', border: '2px dashed rgba(108,99,255,0.35)' }}
+                  >
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center"
+                      style={{ background: 'rgba(108,99,255,0.18)' }}
+                    >
+                      <Upload className="w-7 h-7" style={{ color: '#a89cff' }} />
+                    </div>
+                    <div className="text-center px-6">
+                      <p className="text-white font-semibold text-lg mb-1">Upload your photo</p>
+                      <p className="text-gray-400 text-sm">Click to select an image from your device</p>
+                      <p className="text-gray-600 text-xs mt-2">JPG, PNG, WEBP — any size</p>
+                    </div>
+                    <span
+                      className="px-5 py-2 rounded-xl text-sm font-semibold text-white"
+                      style={{ background: 'linear-gradient(135deg, #6C63FF, #a89cff)' }}
+                    >
+                      Choose photo
+                    </span>
+                  </button>
+                )}
+
+                {/* Replace button — shown after upload */}
+                {photoSrc && (
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white glass hover:bg-white/10 transition-all duration-200"
+                  >
+                    <Upload className="w-3.5 h-3.5" />
+                    Replace
+                  </button>
+                )}
+
+                {/* Hidden file input */}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileChange}
                 />
+
                 {/* Floating badge — top-left */}
                 <div className="absolute -top-4 -left-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6C63FF, #a89cff)' }}>
@@ -149,6 +204,7 @@ export default function Hero() {
                     <p className="text-sm font-bold text-white leading-none">5.0 / 5.0</p>
                   </div>
                 </div>
+
                 {/* Floating badge — bottom-right */}
                 <div className="absolute -bottom-4 -right-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
